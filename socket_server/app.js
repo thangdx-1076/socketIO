@@ -5,6 +5,17 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var socketio = require("socket.io");
+// socket io---
+// Create the http server 
+const server = require('http').createServer(app); 
+  
+// Create the Socket IO server on  
+// the top of http server 
+const io = socketio(server); 
+
+//--------
+
 
 var app = express();
 
@@ -17,4 +28,4 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-module.exports = app;
+module.exports = { app: app, server: server }; 
